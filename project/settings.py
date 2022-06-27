@@ -1,19 +1,14 @@
 import os
+import dj_database_url
+
 from environs import Env
 
 env = Env()
 env.read_env()
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': env.str('HOST'),
-        'PORT': env.str('PORT'),
-        'NAME': env.str('BASE_NAME'),
-        'USER': env.str('USER'),
-        'PASSWORD': env.str('PASSWORD'),
-    }
-}
+DB_URL=env.str("DB_URL")
+
+DATABASES = {'default': dj_database_url.config(default=DB_URL)}
 
 INSTALLED_APPS = ['datacenter']
 
